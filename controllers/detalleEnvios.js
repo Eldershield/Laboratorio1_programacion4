@@ -18,14 +18,29 @@ const postDetalleEnvios =(req = request,res = response) =>{
     res.send('Registro Creado')
 }
 
- const putDetalleEnvios =(req = request,res = response) => 
- res.send('PUT Endpoint para detalleEnvios')
+ const putDetalleEnvios =(req = request,res = response) => {
+    let lista= new listadoDetalleEnvios()
+    let datosJSON =leerDB('detalleEnvios');
+    lista.cargarTareasFromArray(datosJSON)
 
-const deleteDetalleEnvios = (req =request,res =response) => 
-res.send('DELETE Endpoint para detalleEnvios')
+    const datos = lista.listadoArr.map(p=>
+        p.id==req.params.id?{"id":p.id,...request.body}:p);
+        guardarDB(datos,'detalleEnvios')
+        res.send('Registro Actualizado')
+ }
+
+const deleteDetalleEnvios = (req =request,res =response) => {
+    let lista = new listadoDetalleEnvios()
+  let datosJSON = leerDB('detalleEnvios');
+  lista.cargarTareasFromArray(datosJSON)
+
+  let data=lista.listadoArr.filter(item=> item.id != req.params.id)
+   guardarDB(datos,'detalleEnvios')
+   res.send('Registro Eliminado')
+}
 
 module.exports ={
-    getdetalleEnvios,
+    getDetalleEnvios,
     postDetalleEnvios,
     putDetalleEnvios,
     deleteDetalleEnvios

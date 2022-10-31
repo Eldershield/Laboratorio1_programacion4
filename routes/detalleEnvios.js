@@ -1,4 +1,4 @@
-const {Router} = requiere('express');
+const {Router} = require('express');
 const{
     getdetalleEnvios,
     postDetalleEnvios,
@@ -10,7 +10,7 @@ const router = Router();
 
 router.get('/', getdetalleEnvios)
 router.post('/', postDetalleEnvios)
-router.put('/', putDetalleEnvios)
-router.delete('/',deleteDetalleEnvios )
+router.put('/:id', putDetalleEnvios)
+router.delete('/:id',deleteDetalleEnvios )
 
 module.exports=router

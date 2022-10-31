@@ -18,11 +18,26 @@ const postPrecios= (req=request,res=response) => {
    res.send('Registro Creado')
 }
 
-const putPrecios = (req=request,res=response) => 
-res.send('PUT Endpoint para precios')
+const putPrecios = (req=request,res=response) => {
+    let lista= new listadoPrecios()
+    let datosJSON =leerDB('precios');
+    lista.cargarTareasFromArray(datosJSON)
 
-const deletePrecios = (req=request,res=response) => 
-res.send('DELETE Endpoint para precios')
+    const datos = lista.listadoArr.map(p=>
+        p.id==req.params.id?{"id":p.id,...request.body}:p);
+        guardarDB(datos,'precios')
+        res.send('Registro Actualizado')
+}
+
+const deletePrecios = (req=request,res=response) => {
+    let lista = new listadoPrecios()
+  let datosJSON = leerDB('precios');
+  lista.cargarTareasFromArray(datosJSON)
+
+  let data=lista.listadoArr.filter(item=> item.id != req.params.id)
+   guardarDB(datos,'precios')
+   res.send('Registro Eliminado')
+}
 
 module.exports={
     getPrecios,

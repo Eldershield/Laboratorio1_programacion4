@@ -1,4 +1,4 @@
-const {Router} = requiere('express')
+const {Router} = require('express')
 
 const{
     getEnvios,
@@ -10,7 +10,7 @@ const router = Router();
 
 router.get('/',getEnvios )
 router.post('/',postEnvios )
-router.put('/',putEnvios )
-router.delete('/',deleteEnvios )
+router.put('/:id',putEnvios )
+router.delete('/:id',deleteEnvios )
 
 module.exports=router

@@ -1,4 +1,4 @@
-const {Router} = requiere('express')
+const {Router} = require('express')
 const{
       getPrecios,
       postPrecios,
@@ -9,7 +9,7 @@ const router = Router();
 
         router.get('/', getPrecios)
         router.post('/', postPrecios)
-        router.put('/', putPrecios)
-        router.delete('/', deletePrecios)
+        router.put('/:id', putPrecios)
+        router.delete('/:id', deletePrecios)
         
 module.exports=router
